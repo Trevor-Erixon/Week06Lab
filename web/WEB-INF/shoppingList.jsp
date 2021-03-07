@@ -13,15 +13,22 @@
     </head>
     <body>
         <h1>Shopping List</h1>
-        <p>Hello, ${username} <a href="ShoppingList?action=logout">Logout</a></p>
-        <form name="addItemForm" method="post">
+        <p>Hello, ${sessionScope.username} <a href="ShoppingList?action=logout">Logout</a></p>
+        
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        
+        <form name="addItemForm" action="" method="post">
             <h2>List</h2>
             Add item: <input type="text" name="item"><input type="submit" value="Add Item">
             <input type="hidden" name="action" value="add">
         </form>
-        <form name="displayDeleteItemForm" method="post">
-            
-            
+        <form name="displayDeleteItemForm" action="" method="post">
+            <ul>
+                
+                
+            </ul>
+            <input type="submit" value="Delete Item">
+            <input type="hidden" name="action" value="delete">
         </form>
     </body>
 </html>
