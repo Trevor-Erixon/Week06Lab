@@ -24,7 +24,7 @@
         <form name="displayDeleteItemForm" action="" method="post">
             <ul>
                 <c:forEach items="${itemList}" var="item">
-                    <input type="radio" name="item" value="${item}">${item}
+                    <input type="radio" name="item" value="${item}">${item}<br>
                 </c:forEach>
             </ul>
             <input type="submit" value="Delete Item">

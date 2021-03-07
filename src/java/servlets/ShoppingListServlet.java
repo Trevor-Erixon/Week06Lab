@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
  */
 public class ShoppingListServlet extends HttpServlet {
     
+    ArrayList<String> items = new ArrayList<>();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,7 +61,7 @@ public class ShoppingListServlet extends HttpServlet {
             session.setAttribute("username", username);
         }
         
-        ArrayList<String> items = new ArrayList<>();
+        //ArrayList<String> items = new ArrayList<>();
         String requestedAction = request.getParameter("action");
                 
         if (requestedAction.equals("add"))
@@ -70,7 +72,7 @@ public class ShoppingListServlet extends HttpServlet {
         }
         else if (requestedAction.equals("delete"))
         {
-            String deleteItem = request.getParameter("newItem");
+            String deleteItem = request.getParameter("item");
             items.remove(deleteItem);
             session.setAttribute("itemList", items);
         }
