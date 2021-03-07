@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * @author Trevor Erixon
  */
 public class ShoppingListServlet extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,21 +49,32 @@ public class ShoppingListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession();        
-        String username = request.getParameter("username");
-        session.setAttribute("username", username);
+        HttpSession session = request.getSession();
+        
+        String username = (String) session.getAttribute("username");
+        
+        if (username == null)
+        {
+            username = request.getParameter("username");
+            session.setAttribute("username", username);
+        }
         
         ArrayList<String> items = new ArrayList<>();
         String requestedAction = request.getParameter("action");
-        
-        if (requestedAction != null)
-        {
-            if (requestedAction.equals("add"))
-            {
                 
-            }
+        if (requestedAction.equals("add"))
+        {
+            String newItem = request.getParameter("newItem");
+            items.add(newItem);
+            session.setAttribute("itemList", items);
         }
-        
+        else if (requestedAction.equals("delete"))
+        {
+            String deleteItem = request.getParameter("newItem");
+            items.remove(deleteItem);
+            session.setAttribute("itemList", items);
+        }
+
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp")
                 .forward(request, response);
     }

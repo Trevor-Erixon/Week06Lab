@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,18 +15,17 @@
     <body>
         <h1>Shopping List</h1>
         <p>Hello, ${sessionScope.username} <a href="ShoppingList?action=logout">Logout</a></p>
-        
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        
+
         <form name="addItemForm" action="" method="post">
             <h2>List</h2>
-            Add item: <input type="text" name="item"><input type="submit" value="Add Item">
+            Add item: <input type="text" name="newItem"><input type="submit" value="Add Item">
             <input type="hidden" name="action" value="add">
         </form>
         <form name="displayDeleteItemForm" action="" method="post">
             <ul>
-                
-                
+                <c:forEach items="${itemList}" var="item">
+                    <input type="radio" name="item" value="${item}">${item}
+                </c:forEach>
             </ul>
             <input type="submit" value="Delete Item">
             <input type="hidden" name="action" value="delete">
